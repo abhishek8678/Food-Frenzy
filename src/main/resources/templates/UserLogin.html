@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Customer Login | Food Frenzy</title>
+	<link rel="stylesheet" th:href="@{/css/main.css}" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body>
+	<nav th:replace="~{Navigation::navbar()}"></nav>
+
+	<div class="auth-wrapper">
+		<div class="auth-card animate-up">
+			<div style="margin-bottom: 32px; text-align: center;">
+				<div style="width: 56px; height: 56px; background: rgba(247, 147, 26, 0.12); border: 1px solid rgba(247, 147, 26, 0.3); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; box-shadow: 0 0 20px rgba(247, 147, 26, 0.25);">
+					<i class="fa-solid fa-user-shield" style="font-size: 1.5rem; color: var(--primary);"></i>
+				</div>
+				<h2 style="font-size: 1.8rem; margin-bottom: 8px;">Customer Sign In</h2>
+				<p style="font-size: 0.9rem; color: var(--muted);">Authenticate to access your gourmet ordering console</p>
+			</div>
+
+			<form th:action="@{/userLogin}" method="post">
+				<div style="margin-bottom: 20px;">
+					<label style="font-size: 0.825rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em;">Email Address</label>
+					<input type="email" name="userEmail" placeholder="you@example.com" class="input-field" required>
+				</div>
+				<div style="margin-bottom: 24px;">
+					<label style="font-size: 0.825rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em;">Password</label>
+					<input type="password" name="userPassword" placeholder="••••••••" class="input-field" required>
+				</div>
+				
+				<p th:if="${error2}" th:text="${error2}" style="color: var(--accent-red); font-size: 0.875rem; margin-bottom: 16px; text-align: center;"></p>
+				
+				<button type="submit" class="btn btn-primary" style="width: 100%; padding: 14px;">
+					Enter Console <i class="fa-solid fa-arrow-right" style="margin-left: 6px;"></i>
+				</button>
+			</form>
+			
+			<div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border-subtle); text-align: center;">
+				<p style="font-size: 0.875rem; color: var(--muted);">
+					Don't have an account? <a th:href="@{/register}" style="color: var(--primary); font-weight: 700; text-decoration: none;">Join the movement</a>
+				</p>
+				<p style="font-size: 0.875rem; color: var(--muted); margin-top: 12px;">
+					Are you an administrator? <a th:href="@{/login}" style="color: var(--primary-gold); font-weight: 600; text-decoration: none;">Access Admin Portal</a>
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<footer style="padding: 40px; text-align: center; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border-subtle);">
+		&copy; 2026 Food Frenzy. Secured for your culinary privacy.
+	</footer>
+</body>
+</html>

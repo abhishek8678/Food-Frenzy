@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Catalog Item | Food Frenzy</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body>
+    <div class="auth-wrapper">
+        <div class="auth-card animate-up" style="max-width: 520px;">
+            <div style="margin-bottom: 32px; text-align: center;">
+                <div style="width: 56px; height: 56px; background: rgba(247, 147, 26, 0.12); border: 1px solid rgba(247, 147, 26, 0.3); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; box-shadow: 0 0 20px rgba(247, 147, 26, 0.2);">
+                    <i class="fa-solid fa-plus" style="font-size: 1.4rem; color: var(--primary);"></i>
+                </div>
+                <h2 style="font-size: 1.75rem; margin-bottom: 8px;">Add Catalog Item</h2>
+                <p style="font-size: 0.875rem; color: var(--muted);">Provision a new gourmet dish into the decentralized menu</p>
+            </div>
+
+            <form th:action="@{/addingProduct}" method="post">
+                <div style="margin-bottom: 18px;">
+                    <label style="font-size: 0.825rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em;">Dish Title</label>
+                    <input type="text" name="pname" placeholder="e.g. Hyderabadi Chicken Biryani" class="input-field" required>
+                </div>
+
+                <div style="margin-bottom: 18px;">
+                    <label style="font-size: 0.825rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em;">Unit Price (₹)</label>
+                    <input type="number" step="0.01" name="pprice" placeholder="e.g. 350" class="input-field font-mono" required>
+                </div>
+
+                <div style="margin-bottom: 30px;">
+                    <label style="font-size: 0.825rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em;">Culinary Description</label>
+                    <textarea name="pdescription" rows="3" placeholder="Enter ingredients, spices, preparation style..." class="input-field" style="resize: none; border-radius: var(--radius-md);" required></textarea>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 12px;">
+                    <a href="/admin/services" class="btn btn-outline">Cancel</a>
+                    <button type="submit" class="btn btn-primary">Publish Dish</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer style="padding: 30px; text-align: center; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border-subtle);">
+        &copy; 2026 Food Frenzy Secure Admin Gateway.
+    </footer>
+</body>
+
+</html>

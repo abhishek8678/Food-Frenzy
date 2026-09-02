@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physical Outposts | Food Frenzy</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        .locate-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 160px 5% 100px;
+        }
+        .map-wrapper {
+            width: 100%;
+            height: 480px;
+            background: var(--surface-matter);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            border: 1px solid var(--border-subtle);
+            margin-top: 48px;
+            position: relative;
+            box-shadow: var(--shadow-subtle);
+        }
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 28px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav th:replace="~{Navigation::navbar()}"></nav>
+
+    <div class="locate-container">
+        <div class="animate-up" style="text-align: center;">
+            <span class="badge-node" style="margin-bottom: 16px;">Physical Kitchen Nodes</span>
+            <h1 style="font-size: clamp(2.5rem, 5vw, 3.8rem); margin-top: 12px;">Find Your Nearest <span class="text-gradient-bitcoin">Frenzy</span> Node</h1>
+            <p style="color: var(--muted); font-size: 1.1rem;">Located at central gourmet hubs, primed to serve your table or your doorstep.</p>
+        </div>
+
+        <div class="map-wrapper animate-up" style="animation-delay: 0.15s;">
+            <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; flex-direction:column; background: linear-gradient(rgba(3,3,4,0.85), rgba(3,3,4,0.85)), url('https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=1200'); background-size: cover;">
+                <i class="fa-solid fa-location-dot" style="font-size: 3.5rem; color: var(--primary); filter: drop-shadow(0 0 15px rgba(247, 147, 26, 0.7));"></i>
+                <h2 style="margin-top: 20px; font-size: 1.6rem; color: var(--foreground);">Flagship Kitchen Node: Downtown Matrix 12</h2>
+                <p class="font-mono" style="color: var(--primary-gold); margin-top: 4px;">New Delhi, India • Primary Dispatch</p>
+            </div>
+        </div>
+
+        <div class="contact-info">
+            <div class="card-glass animate-up" style="animation-delay: 0.2s; text-align: center;">
+                <div style="width: 48px; height: 48px; background: rgba(247, 147, 26, 0.12); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+                    <i class="fa-solid fa-phone" style="color: var(--primary); font-size: 1.2rem;"></i>
+                </div>
+                <h3 style="margin-bottom: 8px; font-size: 1.2rem;">Hotline Support</h3>
+                <p class="font-mono" style="color: var(--muted);">+91 98765 43210</p>
+            </div>
+            <div class="card-glass animate-up" style="animation-delay: 0.3s; text-align: center;">
+                <div style="width: 48px; height: 48px; background: rgba(247, 147, 26, 0.12); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+                    <i class="fa-solid fa-envelope" style="color: var(--primary); font-size: 1.2rem;"></i>
+                </div>
+                <h3 style="margin-bottom: 8px; font-size: 1.2rem;">Direct Dispatch</h3>
+                <p class="font-mono" style="color: var(--muted);">concierge@foodfrenzy.com</p>
+            </div>
+            <div class="card-glass animate-up" style="animation-delay: 0.4s; text-align: center;">
+                <div style="width: 48px; height: 48px; background: rgba(247, 147, 26, 0.12); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+                    <i class="fa-solid fa-clock" style="color: var(--primary); font-size: 1.2rem;"></i>
+                </div>
+                <h3 style="margin-bottom: 8px; font-size: 1.2rem;">Operating Hours</h3>
+                <p class="font-mono" style="color: var(--muted);">Daily: 10:00 - 23:00 UTC+5:30</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

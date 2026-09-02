@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Customer Account | Food Frenzy</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body>
+    <div class="auth-wrapper">
+        <div class="auth-card animate-up" style="max-width: 500px;">
+            <div style="margin-bottom: 32px; text-align: center;">
+                <div style="width: 56px; height: 56px; background: rgba(247, 147, 26, 0.12); border: 1px solid rgba(247, 147, 26, 0.3); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; box-shadow: 0 0 20px rgba(247, 147, 26, 0.2);">
+                    <i class="fa-solid fa-user-plus" style="font-size: 1.4rem; color: var(--primary);"></i>
+                </div>
+                <h2 style="font-size: 1.75rem; margin-bottom: 8px;">Create Customer Node</h2>
+                <p style="font-size: 0.875rem; color: var(--muted);">Register a customer profile via admin control</p>
+            </div>
+
+            <form th:action="@{/addingUser}" method="post">
+                <div style="margin-bottom: 18px;">
+                    <label style="font-size: 0.825rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em;">Customer Name</label>
+                    <input type="text" name="uname" placeholder="e.g. Alice Crypto" class="input-field" required>
+                </div>
+
+                <div style="margin-bottom: 18px;">
+                    <label style="font-size: 0.825rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em;">Email Address</label>
+                    <input type="email" name="uemail" placeholder="customer@example.com" class="input-field" required>
+                </div>
+
+                <div style="margin-bottom: 30px;">
+                    <label style="font-size: 0.825rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em;">Phone Number</label>
+                    <input type="tel" name="unumber" placeholder="10 digit number..." class="input-field font-mono" pattern="[0-9]{10}" required>
+                </div>
+
+                <input type="hidden" name="upassword" value="2330" />
+
+                <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 12px;">
+                    <a href="/admin/services" class="btn btn-outline">Cancel</a>
+                    <button type="submit" class="btn btn-primary">Create User</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer style="padding: 30px; text-align: center; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border-subtle);">
+        &copy; 2026 Food Frenzy Secure Admin Gateway.
+    </footer>
+</body>
+
+</html>

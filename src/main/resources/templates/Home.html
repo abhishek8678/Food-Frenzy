@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Frenzy | Premium Dining Experience</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" th:href="@{/css/Home.css}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body>
+    <nav th:replace="~{Navigation::navbar()}"></nav>
+
+    <main>
+        <section class="hero-section">
+            <div class="hero-ambient-glow"></div>
+            <div class="container hero-content animate-up">
+                <div class="hero-tag-wrapper">
+                    <span class="pulse-dot"></span>
+                    <span class="hero-tag">Decentralized Dining Protocol</span>
+                </div>
+                <h1 class="hero-title">Taste the <span class="text-gradient-bitcoin">Frenzy</span> in Every Single Bite.</h1>
+                <p class="hero-subtitle">Elevating gourmet cuisine with mathematical precision, hand-picked ingredients, and world-class culinary craftsmanship.</p>
+                
+                <div class="hero-actions">
+                    <a href="/products" class="btn btn-primary">
+                        Explore Catalog <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    <a href="/about" class="btn btn-outline">Our Architecture</a>
+                </div>
+
+                <!-- Technical Stats Ticker -->
+                <div class="hero-stats-ticker">
+                    <div class="stat-item">
+                        <div class="stat-num text-gradient-gold">30<span style="font-size: 1rem; color: var(--primary);">MIN</span></div>
+                        <div class="stat-desc">Block Latency (Delivery)</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-num text-gradient-gold">100<span style="font-size: 1rem; color: var(--primary);">%</span></div>
+                        <div class="stat-desc">Farm Fresh Organic</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-num text-gradient-gold">4.9<span style="font-size: 1.1rem; color: var(--primary-gold);"><i class="fa-solid fa-star"></i></span></div>
+                        <div class="stat-desc">Consensus Score</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features-section">
+            <div class="container">
+                <div class="features-header animate-up">
+                    <span class="badge-node" style="margin-bottom: 16px;">Core Infrastructure</span>
+                    <h2>Engineered for Culinary Excellence</h2>
+                    <p>Discover what sets our dining network apart from ordinary kitchens.</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card animate-up">
+                        <div class="feature-icon-wrapper">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <h3>Lightning Delivery</h3>
+                        <p>Piping hot gourmet meals delivered to your doorstep in 30 minutes or less with zero transaction friction.</p>
+                    </div>
+                    <div class="feature-card animate-up" style="animation-delay: 0.1s;">
+                        <div class="feature-icon-wrapper">
+                            <i class="fa-solid fa-seedling"></i>
+                        </div>
+                        <h3>Proof of Quality</h3>
+                        <p>100% organic ingredients sourced directly from verified local sustainable farms with full supply-chain transparency.</p>
+                    </div>
+                    <div class="feature-card animate-up" style="animation-delay: 0.2s;">
+                        <div class="feature-icon-wrapper">
+                            <i class="fa-solid fa-fire-burner"></i>
+                        </div>
+                        <h3>Master Craftsmen</h3>
+                        <p>World-class chefs dedicated to forging culinary masterpieces with signature spice matrices and passion.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer-main">
+        <div class="container footer-content">
+            <a href="/" class="nav-logo footer-logo">
+                <i class="fa-solid fa-fire-burner"></i> Food <span class="text-gradient-bitcoin">Frenzy</span>
+            </a>
+            <p class="footer-desc">Setting the digital gold standard in premium dining and precision doorstep delivery.</p>
+            <div class="footer-socials">
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-github"></i></a>
+            </div>
+            <p class="footer-copy">&copy; 2026 Food Frenzy. Secured & Engineered with Pride.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

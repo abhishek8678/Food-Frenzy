@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard | Food Frenzy</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" th:href="@{/css/BuyProduct.css}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <a href="/home" class="sidebar-logo">
+                <i class="fa-solid fa-fire-burner"></i> Food <span class="text-gradient-bitcoin" style="margin-left: 2px;">Frenzy</span>
+            </a>
+            <nav class="sidebar-nav">
+                <a href="/home" class="sidebar-link">
+                    <i class="fa-solid fa-house"></i> Home
+                </a>
+                <a href="/products" class="sidebar-link">
+                    <i class="fa-solid fa-utensils"></i> Menu Catalog
+                </a>
+                <a href="/dashboard" class="sidebar-link active">
+                    <i class="fa-solid fa-gauge-high"></i> User Console
+                </a>
+                <a href="/cart" class="sidebar-link">
+                    <i class="fa-solid fa-cart-shopping"></i> Active Cart
+                </a>
+                <a href="/about" class="sidebar-link">
+                    <i class="fa-solid fa-circle-info"></i> Our Architecture
+                </a>
+                <div class="sidebar-footer">
+                    <a href="/logout" class="btn btn-outline" style="width: 100%; border-color: rgba(239, 68, 68, 0.3); color: #EF4444;">
+                        <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+                    </a>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="dashboard-header animate-up">
+                <span class="badge-node" style="margin-bottom: 12px;">Active Session</span>
+                <h1>Welcome Back, <span th:text="${name}" class="text-gradient-bitcoin">User</span></h1>
+                <p>Execute gourmet orders and inspect your real-time transaction activity.</p>
+            </header>
+
+            <!-- Search Section -->
+            <div class="search-card animate-up" style="animation-delay: 0.05s;">
+                <form th:action="@{/product/search}" method="post">
+                    <h3>Find a Culinary Item</h3>
+                    <div class="search-group">
+                        <input type="text" name="productName" class="input-field" placeholder="Search catalog: Biryani, Paneer, Tikka, Noodles..." required>
+                        <button type="submit" class="btn btn-primary" style="white-space: nowrap;">
+                            <i class="fa-solid fa-magnifying-glass"></i> Search
+                        </button>
+                    </div>
+                    <p th:if="${message}" th:text="${message}" style="color: var(--primary); margin-top: 12px; font-size: 0.875rem; font-weight: 600;"></p>
+                </form>
+            </div>
+
+            <!-- Order Placing Section (Result) -->
+            <div th:if="${product!=null}" class="animate-up" style="animation-delay: 0.1s;">
+                <h3 style="margin-bottom: 20px; font-size: 1.35rem;">Query Result</h3>
+                <div class="product-detail-card">
+                    <div class="product-detail-grid">
+                        <div class="product-image-section">
+                            <i class="fa-solid fa-utensils"></i>
+                        </div>
+                        
+                        <div class="product-form-section">
+                            <form th:action="@{/product/order}" th:object="${product}" method="post">
+                                <div style="margin-bottom: 24px;">
+                                    <span class="product-badge">Fresh & Hot</span>
+                                    <h2 class="product-title" th:text="${product.pname}">Product Name</h2>
+                                    <p class="product-desc">Experience our signature culinary masterpiece, prepared with secrets from our master chefs.</p>
+                                </div>
+
+                                <div class="product-meta">
+                                    <div>
+                                        <span class="meta-label">UNIT PRICE</span>
+                                        <div class="meta-value-price">₹<span th:text="${#numbers.formatDecimal(product.pprice, 0, 0)}">300</span></div>
+                                        <input type="hidden" name="oName" th:value="${product.pname}">
+                                        <input type="hidden" name="oPrice" th:value="${product.pprice}">
+                                    </div>
+                                    <div>
+                                        <span class="meta-label">ORDER QUANTITY</span>
+                                        <input type="number" name="oQuantity" value="1" min="1" class="input-field font-mono" style="margin-top: 4px;" required>
+                                    </div>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary" style="width: 100%; height: 50px; font-size: 1rem;">
+                                    Confirm Order <i class="fa-solid fa-basket-shopping" style="margin-left: 8px;"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order History Section -->
+            <div th:if="${orders!=null}" class="animate-up" style="animation-delay: 0.15s;">
+                <h2 class="order-history-title">Recent Order Activity</h2>
+                <div class="table-wrapper">
+                    <table class="order-table">
+                        <thead>
+                            <tr>
+                                <th>DISH ITEM</th>
+                                <th>UNIT PRICE</th>
+                                <th>QTY</th>
+                                <th>TOTAL AMOUNT</th>
+                                <th>TIMESTAMP</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="order :${orders}">
+                                <td class="dish-name" th:text="${order.oName}">Biryani</td>
+                                <td class="font-mono" th:text="'₹' + ${#numbers.formatDecimal(order.oPrice, 0, 0)}">₹300</td>
+                                <td class="font-mono" th:text="${order.oQuantity}">1</td>
+                                <td class="total-amount font-mono" th:text="'₹' + ${#numbers.formatDecimal(order.totalAmmout, 0, 0)}">₹300</td>
+                                <td class="order-date font-mono" th:text="${order.orderDate}">2026-04-09</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

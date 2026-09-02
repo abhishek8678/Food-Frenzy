@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart | Food Frenzy</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        .cart-container {
+            max-width: 1100px;
+            margin: 130px auto 70px;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: 1.8fr 1.1fr;
+            gap: 36px;
+        }
+        @media (max-width: 820px) {
+            .cart-container {
+                grid-template-columns: 1fr;
+                margin-top: 100px;
+            }
+        }
+        .cart-items-wrapper {
+            background: var(--surface-matter);
+            border-radius: var(--radius-xl);
+            padding: 36px;
+            box-shadow: var(--shadow-subtle);
+            border: 1px solid var(--border-subtle);
+        }
+        .cart-summary-wrapper {
+            background: var(--surface-matter);
+            border-radius: var(--radius-xl);
+            padding: 36px;
+            box-shadow: var(--shadow-subtle);
+            border: 1px solid var(--border-subtle);
+            height: fit-content;
+            position: sticky;
+            top: 120px;
+        }
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 22px 0;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        .item-details {
+            flex: 1;
+        }
+        .item-details h3 {
+            font-size: 1.15rem;
+            margin-bottom: 4px;
+            color: var(--foreground);
+        }
+        .item-details p {
+            font-size: 0.95rem;
+            color: var(--primary-gold);
+            font-weight: 600;
+        }
+        .item-quantity-form {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .quantity-input {
+            width: 64px;
+            text-align: center;
+            padding: 8px;
+            background: rgba(3, 3, 4, 0.8);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            color: var(--foreground);
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: var(--transition-fast);
+        }
+        .quantity-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(247, 147, 26, 0.4);
+        }
+        .remove-btn {
+            color: var(--muted);
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            cursor: pointer;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 12px;
+            border-radius: var(--radius-full);
+            transition: var(--transition-fast);
+        }
+        .remove-btn:hover {
+            color: #FFFFFF;
+            background: #EF4444;
+            border-color: #EF4444;
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+        }
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            font-size: 0.95rem;
+            color: var(--muted);
+        }
+        .summary-row span:last-child {
+            color: var(--foreground);
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+        }
+        .summary-total {
+            border-top: 1px solid var(--border-subtle);
+            padding-top: 18px;
+            margin-top: 18px;
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--foreground);
+        }
+        .summary-total span:last-child {
+            color: var(--primary-gold);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.4rem;
+        }
+        .empty-cart-state {
+            text-align: center;
+            padding: 60px 20px;
+        }
+        .empty-cart-state i {
+            font-size: 3.5rem;
+            color: var(--muted);
+            opacity: 0.4;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Import Navigation Fragment -->
+    <div th:replace="~{Navigation :: navbar}"></div>
+
+    <main class="cart-container">
+        <!-- Cart Items List -->
+        <section class="cart-items-wrapper animate-up">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px;">
+                <h2 style="font-size: 1.75rem; display: flex; align-items: center; gap: 12px; margin: 0;">
+                    <i class="fa-solid fa-cart-shopping text-gradient-bitcoin"></i> Your Active Cart
+                </h2>
+                <span class="badge-node" th:if="${cart != null && !cart.isEmpty()}" th:text="${cart.size()} + ' Items'">2 Items</span>
+            </div>
+
+            <!-- Display items if cart is not empty -->
+            <div th:if="${cart != null && !cart.isEmpty()}">
+                <div th:each="item : ${cart}" class="cart-item">
+                    <div class="item-details">
+                        <h3 th:text="${item.product.pname}">Item Name</h3>
+                        <p class="font-mono" th:text="'₹' + ${#numbers.formatDecimal(item.product.pprice, 0, 0)}">₹350</p>
+                    </div>
+
+                    <!-- Quantity Form -->
+                    <form th:action="@{/cart/update/{id}(id=${item.product.pid})}" method="post" class="item-quantity-form">
+                        <input type="number" name="quantity" th:value="${item.quantity}" min="1" max="20" class="quantity-input" onchange="this.form.submit()">
+                    </form>
+
+                    <!-- Remove Link -->
+                    <a th:href="@{/cart/remove/{id}(id=${item.product.pid})}" class="remove-btn">
+                        <i class="fa-solid fa-trash-can"></i> Remove
+                    </a>
+                </div>
+            </div>
+
+            <!-- Empty Cart State -->
+            <div th:if="${cart == null || cart.isEmpty()}" class="empty-cart-state">
+                <i class="fa-solid fa-basket-shopping"></i>
+                <h3 style="font-size: 1.4rem; margin-bottom: 8px;">Your Cart is Empty</h3>
+                <p style="margin: 0 0 24px; color: var(--muted);">Explore our culinary catalog to add premium dishes!</p>
+                <a href="/products" class="btn btn-primary">Explore Menu Catalog</a>
+            </div>
+        </section>
+
+        <!-- Cart Summary & Checkout -->
+        <section class="cart-summary-wrapper animate-up" style="animation-delay: 0.1s;">
+            <h3 style="font-size: 1.35rem; margin-bottom: 24px; letter-spacing: -0.02em;">Order Summary</h3>
+
+            <div class="summary-row">
+                <span>Subtotal</span>
+                <span th:text="'₹' + ${#numbers.formatDecimal(subtotal, 0, 0)}">₹0</span>
+            </div>
+            <div class="summary-row">
+                <span>Network Delivery Fee</span>
+                <span th:text="'₹' + ${#numbers.formatDecimal(delivery, 0, 0)}">₹0</span>
+            </div>
+            <div class="summary-total summary-row">
+                <span>Total Due</span>
+                <span th:text="'₹' + ${#numbers.formatDecimal(total, 0, 0)}">₹0</span>
+            </div>
+
+            <form th:action="@{/cart/checkout}" method="post" style="margin-top: 28px;">
+                <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 14px;" th:disabled="${cart == null || cart.isEmpty()}">
+                    Place Order (Checkout) <i class="fa-solid fa-bolt" style="margin-left: 6px;"></i>
+                </button>
+            </form>
+            <a href="/products" class="btn btn-outline" style="width: 100%; justify-content: center; margin-top: 14px; padding: 12px;">
+                Continue Browsing
+            </a>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Protocol Console | Food Frenzy</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" th:href="@{/css/Admin_Page.css}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+        <a href="/home" class="nav-logo" style="margin-bottom: 40px;">
+            <i class="fa-solid fa-fire-burner"></i> Food <span class="text-gradient-bitcoin">Frenzy</span>
+        </a>
+        
+        <nav style="flex: 1;">
+            <a href="#stats" class="sidebar-link active"><i class="fa-solid fa-chart-line"></i> Overview</a>
+            <a href="#admins" class="sidebar-link"><i class="fa-solid fa-shield-halved"></i> Administrators</a>
+            <a href="#users" class="sidebar-link"><i class="fa-solid fa-users"></i> Customer Accounts</a>
+            <a href="#products" class="sidebar-link"><i class="fa-solid fa-utensils"></i> Menu Catalog</a>
+            <a href="#orders" class="sidebar-link"><i class="fa-solid fa-receipt"></i> Order Ledger</a>
+        </nav>
+
+        <div style="border-top: 1px solid var(--border-subtle); padding-top: 24px;">
+            <a href="/logout" class="sidebar-link" style="color: var(--accent-red); border-color: rgba(239, 68, 68, 0.3);">
+                <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+        <header class="admin-header">
+            <div>
+                <span class="badge-node" style="margin-bottom: 8px;">Back-Office Gateway</span>
+                <h1 style="font-size: 2.2rem; letter-spacing: -0.03em;">Admin Operations Console</h1>
+                <p style="color: var(--muted);">Real-time monitoring and database management</p>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: center;">
+                <a th:href="@{/home}" class="btn btn-outline" style="padding: 8px 18px;">Preview Site</a>
+                <a th:href="@{/addAdmin}" class="btn btn-primary" style="padding: 8px 20px;"><i class="fa-solid fa-plus"></i> New Admin</a>
+            </div>
+        </header>
+
+        <!-- Stats Overview -->
+        <section id="stats" class="stats-grid animate-up">
+            <div class="stat-card">
+                <i class="fa-solid fa-users"></i>
+                <span class="stat-value text-gradient-gold" th:text="${users.size()}">0</span>
+                <span class="stat-label">Total Customers</span>
+            </div>
+            <div class="stat-card">
+                <i class="fa-solid fa-utensils"></i>
+                <span class="stat-value text-gradient-bitcoin" th:text="${products.size()}">0</span>
+                <span class="stat-label">Menu Items</span>
+            </div>
+            <div class="stat-card">
+                <i class="fa-solid fa-receipt"></i>
+                <span class="stat-value text-gradient-gold" th:text="${orders.size()}">0</span>
+                <span class="stat-label">Total Transactions</span>
+            </div>
+            <div class="stat-card">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span class="stat-value text-gradient-bitcoin" th:text="${admins.size()}">0</span>
+                <span class="stat-label">Staff Nodes</span>
+            </div>
+        </section>
+
+        <!-- Administrators Section -->
+        <section id="admins" class="data-section animate-up" style="animation-delay: 0.1s;">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-shield-halved" style="color: var(--primary);"></i> Administrators</h2>
+                <a th:href="@{/addAdmin}" class="btn btn-outline" style="padding: 6px 14px; font-size: 0.75rem;">+ Add Admin</a>
+            </div>
+            <div class="table-container">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>NODE ID</th>
+                            <th>ADMIN NAME</th>
+                            <th>EMAIL ADDRESS</th>
+                            <th>HASH / PASSWORD</th>
+                            <th>PHONE</th>
+                            <th>ACTIONS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="admin : ${admins}">
+                            <td class="font-mono" th:text="${admin.adminId}">1</td>
+                            <td style="font-weight: 600;" th:text="${admin.adminName}">Name</td>
+                            <td class="font-mono" style="color: var(--muted);" th:text="${admin.adminEmail}">Email</td>
+                            <td><code class="font-mono" style="color: var(--primary-gold); font-size: 0.75rem;" th:text="${admin.adminPassword}">****</code></td>
+                            <td class="font-mono" th:text="${admin.adminNumber}">000</td>
+                            <td>
+                                <div style="display: flex; gap: 8px;">
+                                    <a th:href="@{'/updateAdmin/'+${admin.adminId}}" class="action-btn edit" title="Edit Admin"><i class="fa-solid fa-pen"></i></a>
+                                    <a th:href="@{'/deleteAdmin/'+${admin.adminId}}" class="action-btn delete" title="Delete Admin"><i class="fa-solid fa-trash"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Users Section -->
+        <section id="users" class="data-section animate-up" style="animation-delay: 0.2s;">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-users" style="color: var(--primary);"></i> Customer Accounts</h2>
+                <a th:href="@{/addUser}" class="btn btn-outline" style="padding: 6px 14px; font-size: 0.75rem;">+ Add User</a>
+            </div>
+            <div class="table-container">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>USER ID</th>
+                            <th>CUSTOMER NAME</th>
+                            <th>EMAIL ADDRESS</th>
+                            <th>CONTACT NO.</th>
+                            <th>ACTIONS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="user : ${users}">
+                            <td class="font-mono" th:text="${user.u_id}">1</td>
+                            <td style="font-weight: 600;" th:text="${user.uname}">User</td>
+                            <td class="font-mono" style="color: var(--muted);" th:text="${user.uemail}">Email</td>
+                            <td class="font-mono" th:text="${user.unumber}">000</td>
+                            <td>
+                                <div style="display: flex; gap: 8px;">
+                                    <a th:href="@{'/updateUser/'+${user.u_id}}" class="action-btn edit" title="Edit User"><i class="fa-solid fa-pen"></i></a>
+                                    <a th:href="@{'/deleteUser/'+${user.u_id}}" class="action-btn delete" title="Delete User"><i class="fa-solid fa-trash"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section id="products" class="data-section animate-up" style="animation-delay: 0.3s;">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-utensils" style="color: var(--primary);"></i> Menu Catalog Management</h2>
+                <a th:href="@{/addProduct}" class="btn btn-outline" style="padding: 6px 14px; font-size: 0.75rem;">+ Add Dish</a>
+            </div>
+            <div class="table-container">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>ITEM ID</th>
+                            <th>DISH NAME</th>
+                            <th>UNIT PRICE</th>
+                            <th>ACTIONS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="product : ${products}">
+                            <td class="font-mono" th:text="${product.pid}">1</td>
+                            <td style="font-weight: 600;" th:text="${product.pname}">Dish</td>
+                            <td class="font-mono" style="color: var(--primary-gold); font-weight: 700;" th:text="'₹' + ${product.pprice}">₹300</td>
+                            <td>
+                                <div style="display: flex; gap: 8px;">
+                                    <a th:href="@{'/updateProduct/'+${product.pid}}" class="action-btn edit" title="Edit Dish"><i class="fa-solid fa-pen"></i></a>
+                                    <a th:href="@{'/deleteProduct/'+${product.pid}}" class="action-btn delete" title="Delete Dish"><i class="fa-solid fa-trash"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Orders Section -->
+        <section id="orders" class="data-section animate-up" style="animation-delay: 0.4s;">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-receipt" style="color: var(--primary);"></i> Order Transactions Ledger</h2>
+            </div>
+            <div class="table-container">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>CUSTOMER</th>
+                            <th>DISH ITEM</th>
+                            <th>QUANTITY</th>
+                            <th>TOTAL AMOUNT</th>
+                            <th>TIMESTAMP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="order : ${orders}">
+                            <td>
+                                <div style="font-weight: 600;" th:text="${order.user.uname}">User</div>
+                                <div class="font-mono" style="font-size: 0.75rem; color: var(--muted);" th:text="${order.user.uemail}">Email</div>
+                            </td>
+                            <td th:text="${order.oName}">Dish</td>
+                            <td class="font-mono" th:text="${order.oQuantity}">1</td>
+                            <td class="font-mono" style="color: var(--primary-gold); font-weight: 700;" th:text="'₹' + ${order.totalAmmout}">₹300</td>
+                            <td class="font-mono" style="font-size: 0.8rem; color: var(--muted);" th:text="${#dates.format(order.orderDate, 'dd MMM yyyy HH:mm')}">Date</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

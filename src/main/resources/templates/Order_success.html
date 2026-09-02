@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Order Confirmed | Food Frenzy</title>
+	<link rel="stylesheet" th:href="@{/css/main.css}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+	<style>
+		.success-wrapper {
+			min-height: 100vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 40px 20px;
+		}
+		.success-card {
+			background: var(--surface-matter);
+			border: 1px solid rgba(16, 185, 129, 0.4);
+			border-radius: var(--radius-xl);
+			padding: 48px;
+			max-width: 520px;
+			width: 100%;
+			text-align: center;
+			box-shadow: 0 0 40px -10px rgba(16, 185, 129, 0.2);
+		}
+		.success-icon {
+			width: 72px;
+			height: 72px;
+			background: rgba(16, 185, 129, 0.15);
+			border: 1px solid rgba(16, 185, 129, 0.4);
+			border-radius: var(--radius-full);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin: 0 auto 24px;
+			box-shadow: 0 0 25px rgba(16, 185, 129, 0.3);
+		}
+		.success-icon i {
+			font-size: 2rem;
+			color: var(--accent-green);
+		}
+	</style>
+</head>
+
+<body>
+	<div class="success-wrapper">
+		<div class="success-card animate-up">
+			<div class="success-icon">
+				<i class="fa-solid fa-circle-check"></i>
+			</div>
+			<span class="badge-node" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); color: var(--accent-green); margin-bottom: 16px;">
+				<span class="pulse-dot" style="background: var(--accent-green); box-shadow: 0 0 8px var(--accent-green);"></span> Transaction Verified
+			</span>
+			<h2 style="font-size: 2rem; margin: 12px 0 8px; letter-spacing: -0.03em;">Order Confirmed!</h2>
+			<p style="color: var(--muted); font-size: 0.95rem; margin-bottom: 28px;">Your gourmet feast is now being prepared by our master chefs.</p>
+			
+			<div style="background: rgba(3, 3, 4, 0.6); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 20px; margin-bottom: 32px;">
+				<span style="font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em;">Total Settled Amount</span>
+				<div class="font-mono" style="font-size: 2.2rem; font-weight: 700; color: var(--primary-gold); margin-top: 4px;">
+					<span th:text="'₹ ' + ${#numbers.formatDecimal(amount, 0, 0)} + ' /-'">₹ 350 /-</span>
+				</div>
+			</div>
+
+			<a href="/product/back" class="btn btn-primary" style="width: 100%; padding: 14px;">
+				<i class="fa-solid fa-arrow-left"></i> Return to Console
+			</a>
+		</div>
+	</div>
+</body>
+
+</html>

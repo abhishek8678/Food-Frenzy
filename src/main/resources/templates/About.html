@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Story & Architecture | Food Frenzy</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body>
+    <nav th:replace="~{Navigation::navbar()}"></nav>
+
+    <main class="section-padding">
+        <div class="container">
+            <div style="text-align: center; max-width: 800px; margin: 0 auto 80px;" class="animate-up">
+                <span class="badge-node" style="margin-bottom: 16px;">Genesis & Philosophy</span>
+                <h1 style="font-size: clamp(2.5rem, 5vw, 4rem); margin: 16px 0 24px;">Born from a Passion for <span class="text-gradient-bitcoin">Authenticity</span>.</h1>
+                <p style="font-size: 1.15rem; color: var(--muted); line-height: 1.6;">
+                    Founded with the conviction that fine dining should be transparent, accessible, and mathematically perfected. We bridge the gap between world-class master kitchens and your doorstep.
+                </p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 48px; align-items: center;">
+                <div class="animate-up">
+                    <div style="position: relative; border-radius: var(--radius-xl); overflow: hidden; border: 1px solid var(--border-subtle); box-shadow: var(--glow-card);">
+                        <img th:src="@{/Images/istockphoto-1006271368-612x612.jpg}" alt="Master Kitchen" style="width: 100%; display: block; opacity: 0.85;">
+                    </div>
+                </div>
+                <div class="animate-up" style="animation-delay: 0.15s;">
+                    <div style="display: flex; flex-direction: column; gap: 28px;">
+                        <div class="card-glass" style="border-left: 4px solid var(--primary);">
+                            <h3 style="font-size: 1.4rem; margin-bottom: 10px; color: var(--foreground);">The Vision</h3>
+                            <p style="color: var(--muted); line-height: 1.6;">To be the global benchmark for gourmet culinary logistics, celebrated for our uncompromising ingredient standards and cryptographic reliability.</p>
+                        </div>
+                        <div class="card-glass" style="border-left: 4px solid var(--primary-gold);">
+                            <h3 style="font-size: 1.4rem; margin-bottom: 10px; color: var(--foreground);">The Mission</h3>
+                            <p style="color: var(--muted); line-height: 1.6;">Connecting communities through the universal language of great food, while empowering sustainable local organic farmers and precision kitchen craftsmen.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer style="padding: 60px 5%; text-align: center; border-top: 1px solid var(--border-subtle); font-size: 0.85rem; color: var(--muted);">
+        &copy; 2026 Food Frenzy. Crafted with uncompromising standards & precision.
+    </footer>
+</body>
+
+</html>
