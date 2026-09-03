@@ -1,10 +1,38 @@
-# 🍕 Food Frenzy - Production-Grade Full-Stack Spring Boot Project
+# 🍕 Food Frenzy - Production-Grade Full-Stack Dining Platform
 
-🌐 **Live Application**: [Food Frenzy | Culinary Excellence](https://food-frenzy-0sej.onrender.com/)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.4.2-brightgreen.svg)](https://spring.io/projects/spring-boot)
+[![Java](https://img.shields.io/badge/Java-21%2B-orange.svg)](https://www.oracle.com/java/)
+[![Thymeleaf](https://img.shields.io/badge/Thymeleaf-3.1-green.svg)](https://www.thymeleaf.org/)
+[![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL%20%2F%20H2-blue.svg)](https://www.postgresql.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-Welcome to **Food Frenzy**, a modern, high-performance dining management and ordering platform. Built on **Spring Boot 3.4.2** and **Java 21**, this application is designed for cloud-native deployment, supporting both quick-start in-memory databases (H2) and production-grade persistent databases (PostgreSQL).
+Welcome to **Food Frenzy**, a modern, high-performance gourmet dining management and online ordering platform. Engineered with **Spring Boot 3.4.2** and **Java 21**, this application is designed for cloud-native deployment, supporting both fast zero-config in-memory development (H2) and enterprise persistent storage (PostgreSQL).
 
-This guide walks you through local development, architectural concepts, production configuration, and step-by-step cloud deployment (Render & Docker).
+---
+
+## ✨ Key Features
+
+- 🌓 **Dual-Theme Support (Dark Mode & Aesthetic White Mode)**: 
+  - Integrated theme engine with instant hydration preventing theme flicker (FOUC).
+  - Smooth `0.3s` easing transitions across surfaces, cards, borders, and typography.
+  - User preference persistence saved seamlessly in `localStorage`.
+  - Accessible theme toggle button available across all navigation bars, customer consoles, and admin dashboards.
+- 🛒 **End-to-End Ordering & Cart Management**:
+  - Dynamic category-filtered menu catalog (Biryani, North Indian, Chinese, Beverages).
+  - Interactive shopping cart with quantity modifications and real-time total settlement.
+  - Dedicated order confirmation receipts and transaction ledger.
+- 🔐 **Enterprise Security & Authentication**:
+  - Spring Security filter chain with role-based access control (Customers vs. Administrators).
+  - Social authentication via **Google OAuth 2.0**.
+  - Encrypted password credential protection.
+- 👤 **Customer & Administrative Consoles**:
+  - **Customer Portal**: Personalized profile dashboard, order history, and instant reordering.
+  - **Admin Control Operations**: Full CRUD controls to add/edit catalog dishes, inspect registered users, and provision administrative nodes.
+- 🛠️ **OpenAPI 3 / Swagger Documentation**:
+  - Fully documented interactive API endpoints via Swagger UI.
+- 🗄️ **Dual Database Engine**:
+  - Ready-to-run zero-setup in-memory database (H2) with automated sample data seeding on startup.
+  - Full production persistence compatibility with PostgreSQL.
 
 ---
 
@@ -12,18 +40,18 @@ This guide walks you through local development, architectural concepts, producti
 
 The application adheres to clean **layered architecture** design principles:
 
-- **Presentation Layer (Thymeleaf, CSS, JS)**: Server-side HTML rendering utilizing custom visual utility classes, glassmorphic UI elements, and dynamic loops.
+- **Presentation Layer (Thymeleaf, CSS3, JavaScript)**: Server-side HTML rendering utilizing custom visual utility classes, glassmorphic UI elements, dynamic theme switching, and responsive layouts.
 - **Controller Layer (Spring Web)**: RESTful APIs and traditional Web MVC routing controls handling requests, user session binding, and OAuth flows.
-- **Service Layer (Spring Component)**: Business logic, order calculations, and verification handlers.
-- **Data Access Layer (Spring Data JPA / Hibernate)**: Object-Relational Mapping (ORM) translating Java objects directly to database tables.
-- **Security Filter Chain (Spring Security)**: Built-in filters handling OAuth2, CORS policy setup, endpoint authorizations, and resource control.
+- **Service Layer (Spring Component)**: Business logic, cart state calculations, and order handlers.
+- **Data Access Layer (Spring Data JPA / Hibernate)**: Object-Relational Mapping (ORM) translating domain entities directly to database tables.
+- **Security Filter Chain (Spring Security)**: Built-in filters handling OAuth2, CSRF/CORS policy setup, endpoint authorizations, and resource control.
 
 ### Layer Diagram
 ```text
-[ Browser ] ──▶ [ Controller / MVC ] ──▶ [ Services ] ──▶ [ JPA Repositories ] ──▶ [ Database ]
-                      │                                          │
-                      ▼                                          ▼
-            [ Thymeleaf Templates ]                      [ H2 / PostgreSQL ]
+[ Browser / Client ] ──▶ [ Controller / MVC ] ──▶ [ Services Layer ] ──▶ [ JPA Repositories ] ──▶ [ Database ]
+                                │                                                 │
+                                ▼                                                 ▼
+                      [ Thymeleaf Templates ]                             [ H2 / PostgreSQL ]
 ```
 
 ---
@@ -66,21 +94,19 @@ The application adheres to clean **layered architecture** design principles:
 
 ## 📋 Prerequisites
 
-Before setting up or deploying, verify you have the following installed locally:
-- **Java Development Kit (JDK) 21**
-- *Note: Maven is not required to be installed manually, as the Maven Wrapper (`mvnw` / `mvnw.cmd`) is preloaded in the project.*
+Before running or deploying the project, ensure you have the following installed:
+- **Java Development Kit (JDK) 21** (or Java 17+)
+- *Note: Maven is not required to be installed separately; the Maven Wrapper (`mvnw` / `mvnw.cmd`) is pre-bundled in the repository.*
 
 ---
 
 ## ⚙️ Environment Variables Registry
 
-In production, avoid hardcoding values. Use this table to configure environment variables for deployment on Render, Docker, or your preferred cloud host:
-
 | Variable Name | Purpose | Example Value / Default |
 | :--- | :--- | :--- |
-| `JAVA_HOME` | Points to Java installation directory | `C:\Program Files\Java\jdk-21` |
+| `JAVA_HOME` | Points to your Java installation directory | `C:\Program Files\Java\jdk-21` |
 | `PORT` | Web port Spring Boot listens on | `8080` |
-| `SPRING_DATASOURCE_URL` | JDBC database connection string | `jdbc:postgresql://db:5432/foodfrenzy` |
+| `SPRING_DATASOURCE_URL` | JDBC database connection string | `jdbc:postgresql://localhost:5432/foodfrenzy` |
 | `SPRING_DATASOURCE_USERNAME` | Database username credentials | `postgres` |
 | `SPRING_DATASOURCE_PASSWORD` | Database password credentials | `your_password` |
 | `GOOGLE_CLIENT_ID` | Google OAuth Web App Client ID | `your_client_id.apps.googleusercontent.com` |
@@ -88,50 +114,66 @@ In production, avoid hardcoding values. Use this table to configure environment 
 
 ---
 
-## 🚀 Local Quick-Start (H2 Database)
+## 🚀 Local Quick-Start (H2 In-Memory)
 
-### 1. Clone & Navigate
+### 1. Clone the Repository
 ```bash
-git clone https://github.com/imrajeevnayan/Food-Frenzy.git
+git clone https://github.com/abhishek8678/Food-Frenzy.git
 cd Food-Frenzy
 ```
 
-### 2. Configure Environment `.env`
-Create a file named `.env` in the root directory (this is automatically ignored by Git) to store your local credentials:
+### 2. Configure Local Credentials (Optional)
+To test Google OAuth2 login locally, copy `.env.example` to `.env`:
 ```env
 GOOGLE_CLIENT_ID=your_id_here.apps.googleusercontent.com
 GOOGLE_CLIENT_SECRET=your_secret_here
 ```
+*(Default fallback placeholders are built in if OAuth is not configured).*
 
 ### 3. Run Locally
 
-*   **Windows (PowerShell)**:
-    ```powershell
-    Get-Content .env | ForEach-Object { $name, $value = $_.Split('=', 2); if ($name -and $value) { [System.Environment]::SetEnvironmentVariable($name.Trim(), $value.Trim()) } }; .\mvnw.cmd spring-boot:run
-    ```
-*   **macOS / Linux**:
-    ```bash
-    export $(cat .env | xargs) && ./mvnw spring-boot:run
-    ```
+- **Windows (PowerShell)**:
+  ```powershell
+  .\mvnw.cmd spring-boot:run
+  ```
+  *(If your system defaults to Java 17 while JDK 21+ is in another directory, run:)*
+  ```powershell
+  $env:JAVA_HOME = 'C:\Program Files\Java\jdk-25'
+  $env:PATH = "C:\Program Files\Java\jdk-25\bin;$env:PATH"
+  .\mvnw.cmd spring-boot:run
+  ```
 
-### 4. Port Access
-- **Frontend App**: [http://localhost:8080/](http://localhost:8080/)
-- **Swagger Docs**: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
-- **H2 DB Console**: [http://localhost:8080/h2-console](http://localhost:8080/h2-console) (JDBC URL: `jdbc:h2:mem:foodfrenzy`, User: `sa`, Pass: *blank*)
+- **macOS / Linux**:
+  ```bash
+  ./mvnw spring-boot:run
+  ```
+
+### 4. Access URLs
+- **Web Application**: [http://localhost:8080/](http://localhost:8080/)
+- **Menu Catalog**: [http://localhost:8080/products](http://localhost:8080/products)
+- **Swagger Documentation**: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+- **H2 Database Console**: [http://localhost:8080/h2-console](http://localhost:8080/h2-console)
+  - **JDBC URL**: `jdbc:h2:mem:foodfrenzy`
+  - **Username**: `sa`
+  - **Password**: *(leave blank)*
 
 ---
 
-## 🗄️ Database Configurations (H2 vs. PostgreSQL)
+## 🔑 Default Administrator Credentials
 
-### Option A: Local Dev / Quick Demo (H2 In-Memory)
-By default, the application runs on H2. It auto-seeds default administrators and catalog entries on startup:
-*   **Admin Email**: `admin@foodfrenzy.com`
-*   **Admin Password**: `admin123`
+On startup, the system automatically initializes sample menu items and provisions a default administrative node:
+- **Email**: `admin@foodfrenzy.com`
+- **Password**: `admin123`
 
-*Note: In-memory data resets every time the application stops or sleeps.*
+---
 
-### Option B: Production Setup (PostgreSQL)
-To run a persistent database locally or in production, configure the environment variables or update `src/main/resources/application.properties` with:
+## 🗄️ Database Configurations
+
+### Option A: Local Quick Dev (H2 In-Memory - Default)
+The application starts out-of-the-box with H2 in-memory storage. All tables and seed data are initialized automatically.
+
+### Option B: Persistent Database (PostgreSQL)
+To run with PostgreSQL persistence locally or in production, configure environment variables or update `src/main/resources/application.properties`:
 ```properties
 spring.datasource.url=jdbc:postgresql://localhost:5432/foodfrenzy
 spring.datasource.username=postgres
@@ -141,48 +183,30 @@ spring.jpa.hibernate.ddl-auto=update
 
 ---
 
-## ☁️ Deploying on Render (Cloud Deployment)
+## 🐳 Docker Containerization
 
-Render parses the project's `Dockerfile` to compile and containerize the Spring Boot application.
-
-### Setup Guide A: H2 Database (Quick Demo)
-1. Go to your **Render Dashboard**, click **New > Web Service**.
-2. Link your `Food-Frenzy` GitHub repository.
-3. Select **Docker** as the Runtime environment.
-4. Go to **Advanced** settings, add the following environment variables:
-   - **`PORT`**: `8080`
-   - **`GOOGLE_CLIENT_ID`**: `[Your Client ID]`
-   - **`GOOGLE_CLIENT_SECRET`**: `[Your Client Secret]`
-5. Click **Create Web Service**.
-
-### Setup Guide B: PostgreSQL (Production Persistence)
-1. Go to Render, click **New > PostgreSQL** to create a persistent database. Copy the **Internal Database URL**.
-2. Create a new **Web Service**, link your repository, and select **Docker** as the Runtime.
-3. Under **Advanced**, add the environment variables:
-   - **`PORT`**: `8080`
-   - **`GOOGLE_CLIENT_ID`**: `[Your Client ID]`
-   - **`GOOGLE_CLIENT_SECRET`**: `[Your Client Secret]`
-   - **`SPRING_DATASOURCE_URL`**: `jdbc:postgresql://<HOST>:<PORT>/foodfrenzy` *(parsed from your Internal Database URL)*
-   - **`SPRING_DATASOURCE_USERNAME`**: `postgres`
-   - **`SPRING_DATASOURCE_PASSWORD`**: `[Your DB Password]`
-4. Click **Create Web Service**.
-
----
-
-## 🐳 Docker Deployment (Local Containerized)
-
-1. Build the production-ready Docker image:
+1. **Build the production Docker image**:
    ```bash
    docker build -t food-frenzy .
    ```
-2. Run the container locally:
+
+2. **Run container**:
    ```bash
-   docker run -p 8080:8080 --env-file .env food-frenzy
+   docker run -p 8080:8080 food-frenzy
    ```
+
+---
+
+## ☁️ Cloud Deployment (Render & Docker)
+
+Render parses the project's root `Dockerfile` to compile and containerize the application automatically:
+1. Navigate to your **Render Dashboard** and click **New > Web Service**.
+2. Connect your `Food-Frenzy` GitHub repository.
+3. Select **Docker** as the Runtime environment.
+4. Under **Advanced Settings**, configure environment variables (`PORT=8080`, plus database and OAuth keys if using PostgreSQL/Google Login).
+5. Click **Create Web Service**.
 
 ---
 
 ## 📄 License
-This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
-
-*Developed by **imrajeevnayan***
+This project is open-source and distributed under the [MIT License](LICENSE).
