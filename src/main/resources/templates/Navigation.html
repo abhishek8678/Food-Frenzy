@@ -30,7 +30,14 @@
             <a th:if="${session.loggedInUser != null || session.loggedInAdmin != null}" href="/logout" class="btn btn-primary" style="padding: 8px 20px;">Sign Out</a>
             <!-- Sign In if no one is logged in -->
             <a th:if="${session.loggedInUser == null && session.loggedInAdmin == null}" href="/login" class="btn btn-primary" style="padding: 8px 20px;">Sign In</a>
+
+            <!-- Mode Switcher: Dark Mode & Aesthetic White Mode -->
+            <button type="button" class="theme-toggle-btn" aria-label="Toggle light/dark mode" title="Switch Theme">
+                <i class="fa-solid fa-sun icon-sun"></i>
+                <i class="fa-solid fa-moon icon-moon"></i>
+            </button>
         </div>
+        <script th:src="@{/JavaScript/theme.js}"></script>
     </nav>
 </body>
 </html>

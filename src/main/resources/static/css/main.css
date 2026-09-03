@@ -47,6 +47,43 @@
     --transition-smooth: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Aesthetic White Mode (Light Palette) */
+[data-theme="light"] {
+    /* Pure, warm, modern clean dining canvas */
+    --bg-void: #F8FAFC; /* Slate-50 */
+    --surface-matter: #FFFFFF;
+    --surface-card: #FFFFFF;
+    --surface-card-hover: #F1F5F9;
+    --foreground: #0F172A; /* Slate-900: Crisp text contrast */
+    --muted: #64748B; /* Slate-500 */
+    --dim-border: #E2E8F0;
+    --border-subtle: rgba(15, 23, 42, 0.08);
+    --border-hover: rgba(234, 88, 12, 0.45);
+    
+    /* Accents */
+    --primary: #EA580C; /* Warm burnt orange with strong contrast on white */
+    --primary-burnt: #C2410C;
+    --primary-gold: #D97706; /* Rich Amber Gold - readable on white */
+    --accent-red: #DC2626;
+    --accent-green: #059669;
+    
+    /* Gradients */
+    --gradient-bitcoin: linear-gradient(135deg, #EA580C, #F7931A);
+    --gradient-gold: linear-gradient(135deg, #D97706, #F59E0B);
+    --gradient-dark: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(241, 245, 249, 0.98) 100%);
+    
+    /* Subtle Luminescent Shadows */
+    --glow-orange: 0 4px 20px -2px rgba(234, 88, 12, 0.28);
+    --glow-orange-intense: 0 8px 25px -3px rgba(234, 88, 12, 0.4);
+    --glow-gold: 0 4px 18px rgba(217, 119, 6, 0.25);
+    --glow-card: 0 12px 30px -8px rgba(15, 23, 42, 0.08), 0 0 15px -3px rgba(234, 88, 12, 0.1);
+    --shadow-subtle: 0 4px 20px -2px rgba(15, 23, 42, 0.06);
+    
+    /* Glass Morphism */
+    --glass-bg: rgba(255, 255, 255, 0.85);
+    --glass-blur: blur(20px);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -65,6 +102,13 @@ body {
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     min-height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+[data-theme="light"] body {
+    background-image: 
+        linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
 }
 
 /* Typography Hierarchy */
@@ -382,3 +426,176 @@ a {
         display: none;
     }
 }
+
+/* ================================================================
+   Aesthetic White Mode Overrides & Enhancements
+   ================================================================ */
+[data-theme="light"] .navbar {
+    background: var(--glass-bg);
+    border: 1px solid var(--border-subtle);
+    box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(15, 23, 42, 0.04);
+}
+
+[data-theme="light"] .navbar:hover {
+    border-color: rgba(234, 88, 12, 0.3);
+    box-shadow: 0 12px 35px -10px rgba(234, 88, 12, 0.12);
+}
+
+[data-theme="light"] .btn-outline {
+    background: rgba(15, 23, 42, 0.03);
+    border: 1px solid var(--border-subtle);
+    color: var(--foreground);
+}
+
+[data-theme="light"] .btn-outline:hover {
+    background: rgba(234, 88, 12, 0.08);
+    border-color: var(--primary);
+    color: var(--primary);
+    box-shadow: 0 4px 15px -3px rgba(234, 88, 12, 0.25);
+}
+
+[data-theme="light"] .btn-gold {
+    color: #FFFFFF !important;
+}
+
+[data-theme="light"] .card-glass,
+[data-theme="light"] .block-card {
+    background: var(--surface-matter);
+    border: 1px solid var(--border-subtle);
+    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06);
+}
+
+[data-theme="light"] .card-glass:hover,
+[data-theme="light"] .block-card:hover {
+    border-color: var(--border-hover);
+    box-shadow: 0 12px 30px -8px rgba(15, 23, 42, 0.1), 0 0 15px -3px rgba(234, 88, 12, 0.12);
+}
+
+[data-theme="light"] .input-field {
+    background: #FFFFFF;
+    border: 1px solid #CBD5E1;
+    color: var(--foreground);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+[data-theme="light"] .input-field::placeholder {
+    color: #94A3B8;
+}
+
+[data-theme="light"] .input-field:focus {
+    background: #FFFFFF;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.15);
+}
+
+[data-theme="light"] .auth-card {
+    background: var(--surface-matter);
+    border: 1px solid var(--border-subtle);
+    box-shadow: 0 20px 50px -10px rgba(15, 23, 42, 0.1), 0 0 20px -5px rgba(234, 88, 12, 0.08);
+}
+
+[data-theme="light"] .auth-card:hover {
+    border-color: rgba(234, 88, 12, 0.35);
+}
+
+/* Receipt / Detail Boxes */
+.receipt-box {
+    background: rgba(3, 3, 4, 0.6);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    margin-bottom: 32px;
+}
+
+[data-theme="light"] .receipt-box {
+    background: #F1F5F9;
+    border-color: #E2E8F0;
+}
+
+/* Smooth Theme Transitions */
+body, .navbar, .card-glass, .block-card, .feature-card, .auth-card,
+.admin-sidebar, .admin-main, .sidebar, .main-content, .cart-items-wrapper,
+.cart-summary-wrapper, .input-field, .stat-card, .data-section,
+.order-table, .admin-table {
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+}
+
+/* ================================================================
+   Theme Toggle Button Component
+   ================================================================ */
+.theme-toggle-btn {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    border-radius: var(--radius-full);
+    background: var(--surface-matter);
+    border: 1px solid var(--border-subtle);
+    color: var(--foreground);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    font-size: 1rem;
+    position: relative;
+    padding: 0;
+    box-shadow: var(--shadow-subtle);
+}
+
+.theme-toggle-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    transform: scale(1.08);
+    box-shadow: 0 0 15px rgba(247, 147, 26, 0.35);
+}
+
+.theme-toggle-btn .icon-sun,
+.theme-toggle-btn .icon-moon {
+    position: absolute;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+
+/* In Dark Mode (Default): Show glowing Sun (to switch to White Mode) */
+[data-theme="dark"] .theme-toggle-btn .icon-sun,
+:root:not([data-theme="light"]) .theme-toggle-btn .icon-sun {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+    color: #F7931A;
+}
+
+[data-theme="dark"] .theme-toggle-btn .icon-moon,
+:root:not([data-theme="light"]) .theme-toggle-btn .icon-moon {
+    opacity: 0;
+    transform: rotate(90deg) scale(0.4);
+    pointer-events: none;
+}
+
+/* In White Mode: Show sleek Moon (to switch to Dark Mode) */
+[data-theme="light"] .theme-toggle-btn .icon-sun {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.4);
+    pointer-events: none;
+}
+
+[data-theme="light"] .theme-toggle-btn .icon-moon {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+    color: #475569;
+}
+
+/* Standalone Floating Theme Toggle */
+.floating-theme-toggle {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 9999;
+    background: var(--surface-matter);
+    width: 44px;
+    height: 44px;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
+}
+
+[data-theme="light"] .floating-theme-toggle {
+    box-shadow: 0 6px 25px rgba(15, 23, 42, 0.12);
+}
+

@@ -7,6 +7,7 @@
     <title>Physical Outposts | Food Frenzy</title>
     <link rel="stylesheet" th:href="@{/css/main.css}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script th:src="@{/JavaScript/theme.js}"></script>
     <style>
         .locate-container {
             max-width: 1200px;
@@ -23,6 +24,21 @@
             margin-top: 48px;
             position: relative;
             box-shadow: var(--shadow-subtle);
+        }
+        .map-banner-inner {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background: linear-gradient(rgba(3, 3, 4, 0.85), rgba(3, 3, 4, 0.85)), url('https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=1200');
+            background-size: cover;
+            transition: background 0.3s ease;
+        }
+        [data-theme="light"] .map-banner-inner {
+            background: linear-gradient(rgba(248, 250, 252, 0.88), rgba(248, 250, 252, 0.88)), url('https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=1200');
+            background-size: cover;
         }
         .contact-info {
             display: grid;
@@ -44,7 +60,7 @@
         </div>
 
         <div class="map-wrapper animate-up" style="animation-delay: 0.15s;">
-            <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; flex-direction:column; background: linear-gradient(rgba(3,3,4,0.85), rgba(3,3,4,0.85)), url('https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=1200'); background-size: cover;">
+            <div class="map-banner-inner">
                 <i class="fa-solid fa-location-dot" style="font-size: 3.5rem; color: var(--primary); filter: drop-shadow(0 0 15px rgba(247, 147, 26, 0.7));"></i>
                 <h2 style="margin-top: 20px; font-size: 1.6rem; color: var(--foreground);">Flagship Kitchen Node: Downtown Matrix 12</h2>
                 <p class="font-mono" style="color: var(--primary-gold); margin-top: 4px;">New Delhi, India • Primary Dispatch</p>

@@ -7,6 +7,7 @@
 	<title>Order Confirmed | Food Frenzy</title>
 	<link rel="stylesheet" th:href="@{/css/main.css}">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+	<script th:src="@{/JavaScript/theme.js}"></script>
 	<style>
 		.success-wrapper {
 			min-height: 100vh;
@@ -56,7 +57,7 @@
 			<h2 style="font-size: 2rem; margin: 12px 0 8px; letter-spacing: -0.03em;">Order Confirmed!</h2>
 			<p style="color: var(--muted); font-size: 0.95rem; margin-bottom: 28px;">Your gourmet feast is now being prepared by our master chefs.</p>
 			
-			<div style="background: rgba(3, 3, 4, 0.6); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 20px; margin-bottom: 32px;">
+			<div class="receipt-box">
 				<span style="font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em;">Total Settled Amount</span>
 				<div class="font-mono" style="font-size: 2.2rem; font-weight: 700; color: var(--primary-gold); margin-top: 4px;">
 					<span th:text="'₹ ' + ${#numbers.formatDecimal(amount, 0, 0)} + ' /-'">₹ 350 /-</span>

@@ -259,3 +259,27 @@
     color: var(--muted);
     opacity: 0.7;
 }
+
+/* Light Mode Overrides for Home */
+[data-theme="light"] .hero-ambient-glow {
+    background: radial-gradient(circle, rgba(234, 88, 12, 0.12) 0%, rgba(247, 147, 26, 0.04) 50%, transparent 70%);
+}
+
+[data-theme="light"] .feature-card {
+    background: var(--surface-matter);
+    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06);
+}
+
+[data-theme="light"] .feature-card:hover {
+    border-color: rgba(234, 88, 12, 0.35);
+    box-shadow: 0 16px 36px -8px rgba(15, 23, 42, 0.1), 0 0 15px -3px rgba(234, 88, 12, 0.15);
+}
+
+[data-theme="light"] .feature-icon-wrapper {
+    background: rgba(234, 88, 12, 0.08);
+    border-color: rgba(234, 88, 12, 0.25);
+}
+
+[data-theme="light"] .footer-socials a:hover {
+    box-shadow: 0 4px 15px rgba(234, 88, 12, 0.25);
+}

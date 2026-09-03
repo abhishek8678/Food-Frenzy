@@ -8,6 +8,7 @@
     <link rel="stylesheet" th:href="@{/css/main.css}" />
     <link rel="stylesheet" th:href="@{/css/BuyProduct.css}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script th:src="@{/JavaScript/theme.js}"></script>
 </head>
 
 <body>
@@ -43,10 +44,18 @@
 
         <!-- Main Content -->
         <main class="main-content">
-            <header class="dashboard-header animate-up">
-                <span class="badge-node" style="margin-bottom: 12px;">Active Session</span>
-                <h1>Welcome Back, <span th:text="${name}" class="text-gradient-bitcoin">User</span></h1>
-                <p>Execute gourmet orders and inspect your real-time transaction activity.</p>
+            <header class="dashboard-header animate-up" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px;">
+                <div>
+                    <span class="badge-node" style="margin-bottom: 12px;">Active Session</span>
+                    <h1>Welcome Back, <span th:text="${name}" class="text-gradient-bitcoin">User</span></h1>
+                    <p>Execute gourmet orders and inspect your real-time transaction activity.</p>
+                </div>
+                <div>
+                    <button type="button" class="theme-toggle-btn" aria-label="Toggle light/dark mode" title="Switch Theme">
+                        <i class="fa-solid fa-sun icon-sun"></i>
+                        <i class="fa-solid fa-moon icon-moon"></i>
+                    </button>
+                </div>
             </header>
 
             <!-- Search Section -->

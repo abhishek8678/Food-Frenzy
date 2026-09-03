@@ -8,6 +8,7 @@
     <link rel="stylesheet" th:href="@{/css/main.css}" />
     <link rel="stylesheet" th:href="@{/css/Admin_Page.css}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script th:src="@{/JavaScript/theme.js}"></script>
 </head>
 
 <body>
@@ -41,6 +42,10 @@
                 <p style="color: var(--muted);">Real-time monitoring and database management</p>
             </div>
             <div style="display: flex; gap: 12px; align-items: center;">
+                <button type="button" class="theme-toggle-btn" aria-label="Toggle light/dark mode" title="Switch Theme">
+                    <i class="fa-solid fa-sun icon-sun"></i>
+                    <i class="fa-solid fa-moon icon-moon"></i>
+                </button>
                 <a th:href="@{/home}" class="btn btn-outline" style="padding: 8px 18px;">Preview Site</a>
                 <a th:href="@{/addAdmin}" class="btn btn-primary" style="padding: 8px 20px;"><i class="fa-solid fa-plus"></i> New Admin</a>
             </div>

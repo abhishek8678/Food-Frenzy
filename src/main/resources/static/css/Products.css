@@ -241,3 +241,40 @@
     border-bottom: 7px solid #EF4444;
     box-shadow: 0 0 6px #EF4444;
 }
+
+/* Light Mode Overrides for Products */
+[data-theme="light"] .filter-btn {
+    background: var(--surface-matter);
+    border-color: var(--border-subtle);
+    color: var(--muted);
+}
+
+[data-theme="light"] .filter-btn:hover {
+    color: var(--foreground);
+    border-color: var(--primary);
+    box-shadow: 0 2px 12px rgba(234, 88, 12, 0.15);
+}
+
+[data-theme="light"] .food-card {
+    background: var(--surface-matter);
+    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06);
+}
+
+[data-theme="light"] .food-card:hover {
+    box-shadow: 0 16px 36px -8px rgba(15, 23, 42, 0.12), 0 0 20px -4px rgba(234, 88, 12, 0.15);
+    border-color: rgba(234, 88, 12, 0.35);
+}
+
+[data-theme="light"] .image-wrapper {
+    background: #F1F5F9;
+}
+
+[data-theme="light"] .image-wrapper img {
+    opacity: 0.95;
+}
+
+[data-theme="light"] .price-tag {
+    color: #0F172A;
+    box-shadow: 0 4px 12px rgba(217, 119, 6, 0.25);
+}
+
