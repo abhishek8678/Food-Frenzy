@@ -19,6 +19,8 @@ public class HomeController
 {
 	@Autowired
 	private ProductServices productServices;
+	@Autowired
+	private Boolean googleOAuthEnabled;
 	@GetMapping(value = {"/home", "/"})
 	@Operation(summary = "Homepage", description = "Loads the main landing page of the application")
 	public String home()
@@ -54,6 +56,7 @@ public class HomeController
 	public String login(Model model)
 	{
 		model.addAttribute("adminLogin",new AdminLogin());
+		model.addAttribute("googleOAuthEnabled", googleOAuthEnabled);
 		return "Login";
 	}
 
